@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Amanda Stoffers">
+  <meta name="description" content="Open-source software by Amanda Stoffers — CERIDWEN and sedpy-jax.">
+  <title>Code · Amanda Stoffers</title>
+  <link rel="canonical" href="https://www.amanda-stoffers.de/code.html">
+  <meta property="og:title" content="Code · Amanda Stoffers">
+  <meta property="og:url" content="https://www.amanda-stoffers.de/code.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">Amanda Stoffers</a>
+      <button class="nav-toggle" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links">
+        <li><a href="index.html">about</a></li>
+        <li><a href="publications.html">publications</a></li>
+        <li><a href="code.html" class="active">code</a></li>
+        <li><a href="talks.html">talks</a></li>
+        <li><a href="cv.html">cv</a></li>
+        <li><button class="theme-toggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+      <h1>Code</h1>
+      <p class="muted">I build differentiable, GPU-native tools for stellar population inference. All of it is open
+        source &mdash; contributions, issues and feature requests are genuinely welcome.</p>
+
+      <section style="margin-top:32px">
+
+        <div class="card">
+          <h3><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> CERIDWEN
+            <span class="repo">· github.com/Espe13/ceridwen</span></h3>
+          <p>A GPU-native, gradient-based SED-fitting framework written in JAX. <em>CERIDWEN</em> (Comprehensive SED
+          Estimation Routine Involving Data-driven Weight calculatioNs) reformulates stellar population synthesis as a
+          fully differentiable computation, so that posteriors over stellar mass, star-formation history, chemical
+          enrichment, dust and redshift can be sampled with Hamiltonian Monte Carlo rather than slower
+          gradient-free methods.</p>
+          <p>The forward model is modular: pre-computed SSP grids, flexible non-parametric star-formation and
+          chemical-enrichment histories, nebular continuum and line emission, per-age-bin dust attenuation with
+          energy-balance IR re-emission, and a differentiable observer-frame conversion including a JAX-native
+          luminosity-distance integrator and IGM transmission. Python-side toggles resolve at trace time, so each
+          spectrum compiles to a single XLA kernel.</p>
+          <div class="meta">
+            <span class="pill">JAX</span><span class="pill">Hamiltonian Monte Carlo</span>
+            <span class="pill">SED fitting</span><span class="pill">FSPS</span><span class="pill">GPU</span>
+          </div>
+          <p class="links-inline" style="margin-top:14px">
+            <a href="https://github.com/Espe13/ceridwen"><i class="fa-brands fa-github"></i> Repository</a>
+            <a href="publications.html"><i class="fa-solid fa-book"></i> Method paper (in prep.)</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-filter" style="color:var(--accent)"></i> sedpy-jax
+            <span class="repo">· github.com/Espe13/sedpy_jax</span></h3>
+          <p>A JAX-friendly port of <span class="muted">sedpy</span> providing differentiable filter projection and a
+          library of dust-attenuation laws. It supplies the photometry and attenuation machinery used by CERIDWEN, so
+          any law registered in <span class="muted">sedpy-jax</span> is immediately available to the fitter with no
+          extra plumbing.</p>
+          <div class="meta">
+            <span class="pill">JAX</span><span class="pill">photometry</span><span class="pill">attenuation laws</span>
+          </div>
+          <p class="links-inline" style="margin-top:14px">
+            <a href="https://github.com/Espe13/sedpy_jax"><i class="fa-brands fa-github"></i> Repository</a>
+          </p>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="social">
+        <a href="mailto:aas208@cam.ac.uk" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://orcid.org/0009-0009-5464-3558" aria-label="ORCID"><i class="fa-brands fa-orcid"></i></a>
+        <a href="https://github.com/Espe13" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+      &copy; <span id="year"></span> Amanda Stoffers.
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

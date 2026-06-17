@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Amanda Stoffers">
+  <meta name="description" content="Publications by Amanda Stoffers.">
+  <title>Publications · Amanda Stoffers</title>
+  <link rel="canonical" href="https://www.amanda-stoffers.de/publications.html">
+  <meta property="og:title" content="Publications · Amanda Stoffers">
+  <meta property="og:url" content="https://www.amanda-stoffers.de/publications.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">Amanda Stoffers</a>
+      <button class="nav-toggle" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links">
+        <li><a href="index.html">about</a></li>
+        <li><a href="publications.html" class="active">publications</a></li>
+        <li><a href="code.html">code</a></li>
+        <li><a href="talks.html">talks</a></li>
+        <li><a href="cv.html">cv</a></li>
+        <li><button class="theme-toggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+      <h1>Publications</h1>
+      <p class="muted">Author list with my name in bold. A full, up-to-date list is on
+        <a href="https://orcid.org/0009-0009-5464-3558">ORCID</a> and
+        <a href="https://scholar.google.com/">Google Scholar</a>.
+        <!-- TODO: update ORCID / Scholar URLs above --></p>
+
+      <section style="margin-top:32px">
+        <h2>First-author</h2>
+
+        <div class="pub">
+          <div class="pub-year">2025</div>
+          <div class="pub-body">
+            <p class="pub-title">The Challenge in Illuminating the Invisible: Constraining LyC Escape with Bayesian
+              Modelling and Symbolic Regression</p>
+            <p class="pub-authors"><span class="me">A. Stoffers</span>, S. Tacchella, C. Simmonds, B. D. Johnson,
+              R. Maiolino</p>
+            <p class="pub-venue">Monthly Notices of the Royal Astronomical Society (2025)</p>
+            <p class="links-inline">
+              <a href="https://doi.org/10.1093/mnras/stag984"><i class="fa-solid fa-link"></i> DOI</a>
+              <a href="https://academic.oup.com/mnras/advance-article/doi/10.1093/mnras/stag984/8696394"><i class="fa-solid fa-up-right-from-square"></i> Journal</a>
+              <!-- TODO: add arXiv link if available -->
+            </p>
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-year">2025</div>
+          <div class="pub-body">
+            <p class="pub-title">CERIDWEN: A GPU-native, Gradient-based SED-Fitting Package for Stellar Population
+              Inference via Hamiltonian Monte Carlo <span class="tag">in prep.</span></p>
+            <p class="pub-authors"><span class="me">A. Stoffers</span>, S. Tacchella, B. D. Johnson</p>
+            <p class="pub-venue">Method paper, in preparation</p>
+            <p class="links-inline">
+              <a href="https://github.com/Espe13/ceridwen"><i class="fa-brands fa-github"></i> Code</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Software</h2>
+        <div class="pub">
+          <div class="pub-year">2025</div>
+          <div class="pub-body">
+            <p class="pub-title">sedpy-jax: A JAX-native port of <span class="muted">sedpy</span> for differentiable
+              filter projection and attenuation laws <span class="tag">software</span></p>
+            <p class="pub-authors"><span class="me">A. Stoffers</span></p>
+            <p class="pub-venue">Software release</p>
+            <p class="links-inline">
+              <a href="https://github.com/Espe13/sedpy_jax"><i class="fa-brands fa-github"></i> Repository</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="social">
+        <a href="mailto:aas208@cam.ac.uk" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://orcid.org/0009-0009-5464-3558" aria-label="ORCID"><i class="fa-brands fa-orcid"></i></a>
+        <a href="https://github.com/Espe13" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+      &copy; <span id="year"></span> Amanda Stoffers.
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
