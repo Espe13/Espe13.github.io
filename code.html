@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Amanda Stoffers">
-  <meta name="description" content="Open-source software by Amanda Stoffers — CERIDWEN and sedpy-jax.">
+  <meta name="description" content="Open-source software and data products by Amanda Stoffers — CERIDWEN, the JADES fit explorer and sedpy_jax.">
   <title>Code · Amanda Stoffers</title>
   <link rel="canonical" href="https://www.amanda-stoffers.de/code.html">
   <meta property="og:title" content="Code · Amanda Stoffers">
@@ -35,45 +35,66 @@
 
   <main>
     <div class="wrap">
-      <h1>Code</h1>
-      <p class="muted">I build differentiable, GPU-native tools for stellar population inference. All of it is open
-        source &mdash; contributions, issues and feature requests are genuinely welcome.</p>
+      <h1>Code &amp; Data</h1>
+      <p class="muted">I build differentiable, GPU-native tools for stellar-population inference and use them to
+        produce survey-scale data products. The code is open source under the MIT licence; contributions, issues
+        and feature requests are welcome.</p>
 
       <section style="margin-top:32px">
 
         <div class="card">
           <h3><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> CERIDWEN
             <span class="repo">· github.com/Espe13/ceridwen</span></h3>
-          <p>A GPU-native, gradient-based SED-fitting framework written in JAX. <em>CERIDWEN</em> (Comprehensive SED
-          Estimation Routine Involving Data-driven Weight calculatioNs) reformulates stellar population synthesis as a
-          fully differentiable computation, so that posteriors over stellar mass, star-formation history, chemical
-          enrichment, dust and redshift can be sampled with Hamiltonian Monte Carlo rather than slower
-          gradient-free methods.</p>
-          <p>The forward model is modular: pre-computed SSP grids, flexible non-parametric star-formation and
-          chemical-enrichment histories, nebular continuum and line emission, per-age-bin dust attenuation with
-          energy-balance IR re-emission, and a differentiable observer-frame conversion including a JAX-native
-          luminosity-distance integrator and IGM transmission. Python-side toggles resolve at trace time, so each
-          spectrum compiles to a single XLA kernel.</p>
+          <p>A GPU-native, end-to-end differentiable SED-fitting framework written in JAX. <em>CERIDWEN</em>
+          (Comprehensive SED Estimation Routine Involving Data-driven Weight calculatioNs) covers the full forward
+          model, from simple stellar populations through nebular emission and dust to the projection onto the
+          observed frame, so that posteriors over stellar mass, star-formation history, chemical enrichment, dust
+          and redshift can be sampled on the GPU.</p>
+          <p>Production inference uses a GPU nested slice sampler, with Hamiltonian Monte Carlo and variational
+          inference available for the same model. It supports non-parametric star-formation histories with of order
+          one hundred age bins and jointly sampled chemical enrichment, and is a median of 134 times faster than
+          CPU <span class="muted">Prospector</span> on high-redshift galaxies.</p>
           <div class="meta">
-            <span class="pill">JAX</span><span class="pill">Hamiltonian Monte Carlo</span>
-            <span class="pill">SED fitting</span><span class="pill">FSPS</span><span class="pill">GPU</span>
+            <span class="pill">JAX</span><span class="pill">nested sampling</span>
+            <span class="pill">Hamiltonian Monte Carlo</span><span class="pill">variational inference</span>
+            <span class="pill">SED fitting</span><span class="pill">GPU</span>
           </div>
           <p class="links-inline" style="margin-top:14px">
-            <a href="https://github.com/Espe13/ceridwen"><i class="fa-brands fa-github"></i> Repository</a>
             <a href="/ceridwen/"><i class="fa-solid fa-book-open"></i> Documentation</a>
-            <a href="publications.html"><i class="fa-solid fa-book"></i> Method paper (in prep.)</a>
+            <a href="https://github.com/Espe13/ceridwen"><i class="fa-brands fa-github"></i> Repository</a>
+            <a href="https://arxiv.org/abs/2609.30145"><i class="fa-solid fa-file-lines"></i> Method paper (arXiv:2609.30145)</a>
           </p>
         </div>
 
         <div class="card">
-          <h3><i class="fa-solid fa-filter" style="color:var(--accent)"></i> sedpy-jax
-            <span class="repo">· github.com/Espe13/sedpy_jax</span></h3>
-          <p>A JAX-friendly port of <span class="muted">sedpy</span> providing differentiable filter projection and a
-          library of dust-attenuation laws. It supplies the photometry and attenuation machinery used by CERIDWEN, so
-          any law registered in <span class="muted">sedpy-jax</span> is immediately available to the fitter with no
-          extra plumbing.</p>
+          <h3><i class="fa-solid fa-diagram-project" style="color:var(--accent)"></i> JADES fit explorer
+            <span class="repo">· interactive catalogue</span></h3>
+          <p>Within the <a href="https://jades-survey.github.io/">JADES</a> collaboration I lead the construction of a
+          value-added catalogue of inferred physical properties (stellar masses, star-formation histories, dust,
+          metallicities and ionising properties) for the galaxies with both NIRCam photometry and NIRSpec
+          spectroscopy, fitted jointly with CERIDWEN. The fit explorer shows these fits and their posteriors: a
+          searchable catalogue table with a page per galaxy, and the <em>SED manifold</em>, which displays scaling
+          relations as rotating projections of the fitted parameter space, with filters on redshift and
+          spectroscopic quality.</p>
           <div class="meta">
-            <span class="pill">JAX</span><span class="pill">photometry</span><span class="pill">attenuation laws</span>
+            <span class="pill">JWST</span><span class="pill">JADES</span><span class="pill">NIRCam + NIRSpec</span>
+            <span class="pill">interactive visualisation</span>
+          </div>
+          <p class="links-inline" style="margin-top:14px">
+            <a href="/jades-fit-explorer/manifold.html"><i class="fa-solid fa-cube"></i> SED manifold</a>
+            <a href="/jades-fit-explorer/index.html"><i class="fa-solid fa-table"></i> Catalogue table</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-filter" style="color:var(--accent)"></i> sedpy_jax
+            <span class="repo">· github.com/Espe13/sedpy_jax</span></h3>
+          <p>A JAX reimplementation of <span class="muted">sedpy</span> (B.&nbsp;D. Johnson) for GPU-ready,
+          differentiable filter handling and broadband photometric projection: transmission curves, AB and Vega
+          magnitudes, flux-conserving rebinning, air&ndash;vacuum conversion, and effective, pivot and zero-point
+          wavelengths, vectorised over many filters at once.</p>
+          <div class="meta">
+            <span class="pill">JAX</span><span class="pill">photometry</span><span class="pill">filters</span>
           </div>
           <p class="links-inline" style="margin-top:14px">
             <a href="https://github.com/Espe13/sedpy_jax"><i class="fa-brands fa-github"></i> Repository</a>

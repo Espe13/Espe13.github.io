@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Amanda Stoffers">
-  <meta name="description" content="Amanda Stoffers — astrophysics PhD student at the Kavli Institute for Cosmology, University of Cambridge. Stellar population inference, SED fitting and Bayesian modelling.">
-  <meta name="keywords" content="Amanda Stoffers, astrophysics, Cambridge, SED fitting, stellar population synthesis, CERIDWEN, Lyman continuum, Bayesian inference, Kavli Institute for Cosmology">
+  <meta name="description" content="Amanda Stoffers — astrophysics PhD student at the Kavli Institute for Cosmology, University of Cambridge. Galaxies in the reionisation epoch, ionising-photon escape, JADES, and CERIDWEN: GPU-native, differentiable SED fitting.">
+  <meta name="keywords" content="Amanda Stoffers, astrophysics, Cambridge, SED fitting, stellar population synthesis, CERIDWEN, JADES, JWST, reionisation, Lyman continuum escape, Bayesian inference, Kavli Institute for Cosmology">
   <title>Amanda Stoffers — Astrophysicist, University of Cambridge</title>
   <link rel="canonical" href="https://www.amanda-stoffers.de/">
 
@@ -35,13 +35,13 @@
       { "@type": "Organization", "name": "Cavendish Laboratory, University of Cambridge" }
     ],
     "alumniOf": { "@type": "Organization", "name": "University of Cambridge" },
-    "knowsAbout": ["Spectral energy distribution fitting", "Stellar population synthesis", "Bayesian inference", "Lyman continuum escape", "Galaxy evolution"],
+    "knowsAbout": ["Spectral energy distribution fitting", "Stellar population synthesis", "Bayesian inference", "Lyman continuum escape", "Galaxy evolution", "Cosmic reionisation"],
     "sameAs": [
       "https://orcid.org/0009-0009-5464-3558",
       "https://github.com/Espe13",
-      "https://scholar.google.com/",
+      "https://www.linkedin.com/in/amanda-stoffers-physics",
       "https://twitter.com/Kopernika13",
-      "https://doi.org/10.1093/mnras/stag984"
+      "https://ui.adsabs.harvard.edu/search/q=author%3A%22Stoffers%2C%20A%22"
     ]
   }
   </script>
@@ -81,26 +81,62 @@
             &amp; <a href="https://www.phy.cam.ac.uk/">Cavendish Laboratory</a>, University of Cambridge.
           </p>
 
-          <p>I am an astrophysicist working on how to turn galaxy data into physical parameters. My research sits at the
-          intersection of stellar population synthesis, Bayesian inference and machine learning: building forward
-          models of galaxy spectral energy distributions (SEDs) and the statistical machinery needed to fit them
-          robustly.</p>
+          <p>I work at the interface of galaxy evolution and statistical methodology. My scientific focus is galaxies
+          in the first billion years: what regulated their ionising output, and how it evolved with star formation
+          and feedback. I study the coupling between star formation, ionising-photon production and escape that sets
+          the galaxy contribution to reionisation, from Lyman-continuum emitters in the local Universe to
+          <em>JWST</em> galaxies in the reionisation epoch.</p>
 
-          <p>Most of my time goes into making SED fitting both more physical and more honest about its uncertainties.
-          I develop <a href="code.html">CERIDWEN</a>, a GPU-native, differentiable SED-fitting framework written in
-          <span class="muted">JAX</span> that uses gradient-based Hamiltonian Monte Carlo to infer stellar masses,
-          star-formation histories, metallicities and dust properties. I also work on the inverse problem of
-          constraining Lyman-continuum escape from galaxies during the Epoch of Reionization using Bayesian modelling
-          and symbolic regression &mdash; inferring something we mostly cannot observe directly from the things we can.</p>
+          <p>Methodologically, I build fast and flexible Bayesian inference tools that scale to entire surveys. I
+          wrote and lead <a href="code.html">CERIDWEN</a>, a GPU-native, end-to-end differentiable SED-fitting
+          framework in <span class="muted">JAX</span> that infers stellar masses, star-formation histories, chemical
+          enrichment, dust and redshifts with nested sampling, Hamiltonian Monte Carlo or variational inference.
+          The method paper is now <a href="https://arxiv.org/abs/2609.30145">on arXiv</a>, and the documentation is
+          <a href="/ceridwen/">online</a>.</p>
 
-          <p>I am a member of the <a href="https://jades-survey.github.io/">JADES</a> and LAPIS collaborations.</p>
+          <p>I am a member of <a href="https://jades-survey.github.io/">JADES</a>, where I lead a value-added
+          catalogue of physical properties for the galaxies with both NIRCam photometry and NIRSpec spectroscopy,
+          fitted jointly with CERIDWEN (explore it in the <a href="/jades-fit-explorer/manifold.html">JADES fit
+          explorer</a>), and two first-author collaboration papers on ionising-photon escape and on
+          star-formation variability. I am a Co-Investigator on LAPIS (<em>JWST</em> GO&nbsp;10790), a pure-parallel
+          imaging survey targeting galaxies at <em>z</em>&nbsp;&gt;&nbsp;16.</p>
 
-          <p>Please do get in touch if any of this overlaps with your own work; I am always happy to talk about SED
+          <div class="explore">
+            <a class="explore-card" href="/ceridwen/">
+              <i class="fa-solid fa-book-open"></i>
+              <span><strong>CERIDWEN documentation</strong>
+              <span class="muted">Installation, tutorials, samplers and API reference</span></span>
+            </a>
+            <a class="explore-card" href="/jades-fit-explorer/manifold.html">
+              <i class="fa-solid fa-cube"></i>
+              <span><strong>JADES fit explorer</strong>
+              <span class="muted">Interactive SED manifold and catalogue of CERIDWEN fits</span></span>
+            </a>
+          </div>
+
+          <h2 class="news-head">News</h2>
+          <ul class="news">
+            <li><span class="news-date">Sep 2026</span>
+              <span>The CERIDWEN method paper is out: Stoffers, Tacchella &amp; Johnson, submitted to MNRAS,
+              <a href="https://arxiv.org/abs/2609.30145">arXiv:2609.30145</a>.</span></li>
+            <li><span class="news-date">Sep 2026</span>
+              <span>Awarded a DiRAC Seedcorn allocation (PI) of GPU time for CERIDWEN fits of the JADES sample.</span></li>
+            <li><span class="news-date">Jul 2026</span>
+              <span>Invited seminar at the Friday Late Afternoon Talks, UCL.</span></li>
+            <li><span class="news-date">2026</span>
+              <span>My LzLCS paper on constraining Lyman-continuum escape with Bayesian modelling and symbolic
+              regression is published in <a href="https://doi.org/10.1093/mnras/stag984">MNRAS</a>.</span></li>
+            <li><span class="news-date">2026</span>
+              <span>Joined LAPIS (<em>JWST</em> GO&nbsp;10790) as a Co-Investigator.</span></li>
+          </ul>
+
+          <p>Please get in touch if any of this overlaps with your own work; I am always happy to talk about SED
           fitting, differentiable astrophysics, or why the forward model is where assumptions quietly become
           conclusions. Contributions to the public code bases are very welcome.</p>
 
-          <p class="muted">When I am not arguing with a likelihood function, I row, currently in the Jesus College Boat Club's
-          first women's crew, under the flag of the three chickens. I also bake sourdough, primarily as a bribery instrument for my crew. I am told both
+          <p class="muted">When I am not arguing with a likelihood function, I row for the Jesus College Boat Club,
+          under the flag of the three chickens: I captained the first women's crew in 2024&ndash;25 and now sit on the
+          club committee. I also bake sourdough, primarily as a bribery instrument for my crew. I am told both
           activities make me insufferable in distinct and complementary ways.</p>
 
           <figure class="inline-photo">
@@ -111,9 +147,9 @@
           <div class="social">
             <a href="mailto:aas208@cam.ac.uk" title="Email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
             <a href="https://orcid.org/0009-0009-5464-3558" title="ORCID" aria-label="ORCID"><i class="fa-brands fa-orcid"></i></a>
-            <!-- TODO: replace with your Google Scholar profile URL -->
-            <a href="https://scholar.google.com/" title="Google Scholar" aria-label="Google Scholar"><i class="fa-brands fa-google-scholar"></i></a>
+            <a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22Stoffers%2C%20A%22&amp;sort=date%20desc" title="NASA ADS" aria-label="NASA ADS"><i class="fa-solid fa-book-open-reader"></i></a>
             <a href="https://github.com/Espe13" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/amanda-stoffers-physics" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
             <a href="https://twitter.com/Kopernika13" title="X / Twitter" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://www.youtube.com/channel/UC8V7FP9RI1q0EgjiU_oDNzg" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
