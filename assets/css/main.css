@@ -345,7 +345,7 @@ footer .social { justify-content: center; font-size: 1.1rem; margin: 0 0 12px; }
 }
 
 /* ---------- JADES manifold preview (index) ---------- */
-.manifold-fig { margin: 26px 0 8px; }
+.manifold-fig { margin: 18px 0 26px; }
 .manifold-link {
   position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
   border: 1px solid var(--border); border-radius: var(--radius);
