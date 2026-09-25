@@ -32,23 +32,24 @@
     const links = document.querySelector(".nav-links");
     if (toggle && links) toggle.addEventListener("click", () => links.classList.toggle("open"));
 
-    initManifold().catch(initStarfield);
+    initStarfield();
+    document.querySelectorAll("[data-manifold]").forEach((el) =>
+      initManifold(el).catch(() => el.classList.add("manifold-failed")));
   });
 
   // -----------------------------------------------------------
-  //  JADES SED manifold background
+  //  JADES SED manifold preview (inside a [data-manifold] element)
   //  The CERIDWEN fits of the JADES galaxies (run sfms12_bursty),
   //  projected onto a moving 2-D plane of the 12-D parameter space,
   //  as in /jades-fit-explorer/manifold.html. It starts at the saved
   //  view below, drifts to a random projection, returns, and repeats.
-  //  Falls back to the starfield if the data cannot be loaded.
   // -----------------------------------------------------------
-  async function initManifold() {
+  async function initManifold(host) {
     const BASE = "/jades-fit-explorer/data/manifold/";
     const RUN = "sfms12_bursty";
-    // Saved view: frame (f=), camera offset/zoom (v=) from the explorer URL.
+    // Saved view: frame (f=) from the explorer URL; centred in the card.
     const HOME_F = "XOl6vrF8hz4ZUNI-WA92PYr2qL4-Zgm_PSniPZZg2j28vJQ-dkr2vRtFwr6jej2-OzYqv3R2lL7RrIO9zmfpvryhDj4s6S8-WYEsvtm0c73eVbE9SgnBvso7qL3L0SC-";
-    const CAM = { x: -49, y: 23, k: 1.22 };
+    const CAM = { x: 0, y: 0, k: 1.1 };
     // House ramp of the explorer, coloured by redshift (2nd-98th percentile span).
     const RAMP = ["#a3acd8","#c7a8cd","#eba4c3","#f8979b","#fd8769",
                   "#f7674c","#e83843","#d11339","#a60f2d","#7a0b21"];
@@ -114,9 +115,8 @@
     orthonormalise(home.p, home.q);
 
     const canvas = document.createElement("canvas");
-    canvas.id = "manifold-bg";
     canvas.setAttribute("aria-hidden", "true");
-    document.body.prepend(canvas);
+    host.prepend(canvas);
     const ctx = canvas.getContext("2d");
     const px = new Float32Array(N), py = new Float32Array(N);
     const P = home.p.slice(), Q = home.q.slice();
@@ -135,13 +135,15 @@
       project(home.p, home.q);
       const x0 = pct(px, .02), x1 = pct(px, .98), y0 = pct(py, .02), y1 = pct(py, .98);
       mx = (x0 + x1) / 2; my = (y0 + y1) / 2;
-      const pad = 60;
+      const pad = 18;
       scale = Math.min((w - 2 * pad) / ((x1 - x0) || 1), (h - 2 * pad) / ((y1 - y0) || 1)) * CAM.k;
-      cx = w / 2 + CAM.x; cy = h / 2 + CAM.y;
+      const f = w / 900;                     // camera offset was set on a ~900 px plot
+      cx = w / 2 + CAM.x * f; cy = h / 2 + CAM.y * f;
     }
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = window.innerWidth; h = window.innerHeight;
+      const rect = host.getBoundingClientRect();
+      w = Math.max(200, rect.width); h = Math.max(150, rect.height);
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       fit(); draw();
@@ -150,8 +152,8 @@
       project(P, Q);
       ctx.clearRect(0, 0, w, h);
       const dark = root.getAttribute("data-theme") === "dark";
-      ctx.globalAlpha = dark ? 0.45 : 0.3;
-      const r = Math.max(1.6, Math.min(2.6, w / 600));
+      ctx.globalAlpha = dark ? 0.9 : 0.85;
+      const r = Math.max(1.3, Math.min(2.2, w / 380));
       for (let b = 0; b < NB; b++) {
         const arr = byBin[b]; if (!arr.length) continue;
         ctx.fillStyle = RAMP[b];
@@ -169,6 +171,9 @@
     resize();
     window.addEventListener("resize", resize);
     new MutationObserver(draw).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    host.classList.add("manifold-ready");
+    let onscreen = true;
+    new IntersectionObserver((e) => { onscreen = e[0].isIntersecting; }).observe(host);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // tour: hold at the saved view, drift out to a random projection, drift back
@@ -176,7 +181,7 @@
     let from = home, to = null, t0 = performance.now() + HOLD, goingHome = false;
     function tick(now) {
       requestAnimationFrame(tick);
-      if (document.hidden || now < t0) return;
+      if (document.hidden || !onscreen || now < t0) return;
       if (!to) { to = goingHome ? home : randomFrame(); }
       const t = Math.min(1, (now - t0) / LEG), e = ease(t);
       slerp(P, from.p, to.p, e); slerp(Q, from.q, to.q, e); orthonormalise(P, Q);

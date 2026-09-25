@@ -344,8 +344,24 @@ footer .social { justify-content: center; font-size: 1.1rem; margin: 0 0 12px; }
   .news li { flex-direction: column; gap: 2px; }
 }
 
-/* ---------- JADES manifold background ---------- */
-#manifold-bg {
-  position: fixed; inset: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none;
+/* ---------- JADES manifold preview (index) ---------- */
+.manifold-fig { margin: 26px 0 8px; }
+.manifold-link {
+  position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-soft); box-shadow: var(--shadow); overflow: hidden;
+  transition: transform .15s ease, border-color .15s ease;
 }
+.manifold-link:hover { transform: translateY(-2px); border-color: var(--accent); text-decoration: none; }
+.manifold-link canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.manifold-link .manifold-cta {
+  position: absolute; right: 12px; bottom: 10px; font-size: .82rem; font-weight: 600;
+  color: var(--accent); background: var(--nav-bg); padding: 3px 10px; border-radius: 999px;
+  border: 1px solid var(--border); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.manifold-link .manifold-fallback {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: .92rem;
+}
+.manifold-link.manifold-ready .manifold-fallback { display: none; }
+.manifold-fig figcaption { font-size: .82rem; color: var(--text-muted); margin-top: 8px; }
