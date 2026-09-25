@@ -343,3 +343,9 @@ footer .social { justify-content: center; font-size: 1.1rem; margin: 0 0 12px; }
   .news { text-align: left; }
   .news li { flex-direction: column; gap: 2px; }
 }
+
+/* ---------- JADES manifold background ---------- */
+#manifold-bg {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none;
+}
