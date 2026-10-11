@@ -45,7 +45,10 @@
   //  view below, drifts to a random projection, returns, and repeats.
   // -----------------------------------------------------------
   async function initManifold(host) {
-    const BASE = "/jades-fit-explorer/data/manifold/";
+    // Opened as a local file (file://), "/jades-fit-explorer/..." points at the disk root,
+    // so fall back to the live site; on the website itself the path stays relative.
+    const BASE = (location.protocol === "file:" ? "https://www.amanda-stoffers.de" : "") +
+                 "/jades-fit-explorer/data/manifold/";
     const RUN = "sfms12_bursty";
     // Saved view: frame (f=) from the explorer URL; centred in the card.
     const HOME_F = "XOl6vrF8hz4ZUNI-WA92PYr2qL4-Zgm_PSniPZZg2j28vJQ-dkr2vRtFwr6jej2-OzYqv3R2lL7RrIO9zmfpvryhDj4s6S8-WYEsvtm0c73eVbE9SgnBvso7qL3L0SC-";

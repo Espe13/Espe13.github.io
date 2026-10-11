@@ -11,9 +11,10 @@
   <meta property="og:url" content="https://www.amanda-stoffers.de/publications.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&family=Silkscreen:wght@400;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/retro-touch.css">
   <script src="assets/js/main.js"></script>
 </head>
 <body>
@@ -36,11 +37,18 @@
   <main>
     <div class="wrap">
       <h1>Publications</h1>
-      <p class="muted">My name is in bold. The complete, automatically updated list is on
+      <p class="muted">The complete, automatically updated list is on
         <a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22Stoffers%2C%20A%22&amp;sort=date%20desc">NASA ADS</a>
         and <a href="https://orcid.org/0009-0009-5464-3558">ORCID</a>.</p>
 
-      <section style="margin-top:32px">
+      <div class="lcd-stats" aria-label="Summary of publications">
+        <a class="lcd" href="#first"><b data-count="first">00</b><span>first-author</span></a>
+        <a class="lcd" href="#prep"><b data-count="prep">00</b><span>in prep.</span></a>
+        <a class="lcd" href="#coauthor"><b data-count="coauthor">00</b><span>co-authored</span></a>
+        <a class="lcd" href="#software"><b data-count="software">00</b><span>software</span></a>
+      </div>
+
+      <section id="first" data-kind="first" style="margin-top:32px">
         <h2>First-author</h2>
 
         <div class="pub">
@@ -76,7 +84,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="prep" data-kind="prep">
         <h2>First-author, in preparation</h2>
 
         <div class="pub">
@@ -102,7 +110,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="coauthor" data-kind="coauthor">
         <h2>Co-authored</h2>
 
         <div class="pub">
@@ -165,7 +173,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="software" data-kind="software">
         <h2>Software</h2>
         <div class="pub">
           <div class="pub-year">2024&ndash;</div>
@@ -208,5 +216,12 @@
     </div>
   </footer>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script>
+    // Fill the LCD counters from the entries on the page.
+    document.querySelectorAll("[data-count]").forEach(function (el) {
+      var n = document.querySelectorAll('section[data-kind="' + el.dataset.count + '"] .pub').length;
+      el.textContent = String(n).padStart(2, "0");
+    });
+  </script>
 </body>
 </html>

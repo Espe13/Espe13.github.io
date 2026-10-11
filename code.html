@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Amanda Stoffers">
-  <meta name="description" content="Open-source software and data products by Amanda Stoffers — CERIDWEN, the JADES fit explorer and sedpy_jax.">
+  <meta name="description" content="Open-source software by Amanda Stoffers: CERIDWEN, the CERIDWEN Ingredient Explorer, the JADES fit explorer and sedpy_jax.">
   <title>Code · Amanda Stoffers</title>
   <link rel="canonical" href="https://www.amanda-stoffers.de/code.html">
   <meta property="og:title" content="Code · Amanda Stoffers">
   <meta property="og:url" content="https://www.amanda-stoffers.de/code.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&family=Silkscreen:wght@400;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/retro-touch.css">
   <script src="assets/js/main.js"></script>
 </head>
 <body>
@@ -36,24 +37,23 @@
   <main>
     <div class="wrap">
       <h1>Code &amp; Data</h1>
-      <p class="muted">I build differentiable, GPU-native tools for stellar-population inference and use them to
-        produce survey-scale data products. The code is open source under the MIT licence; contributions, issues
-        and feature requests are welcome.</p>
+      <p class="muted">Code I have written for stellar population inference, and the interactive pages built on it.
+        The codes are open source under the MIT licence; issues, pull requests and feature requests are welcome.</p>
 
       <section style="margin-top:32px">
 
         <div class="card">
           <h3><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent)"></i> CERIDWEN
             <span class="repo">· github.com/Espe13/ceridwen</span></h3>
-          <p>A GPU-native, end-to-end differentiable SED-fitting framework written in JAX. <em>CERIDWEN</em>
-          (Comprehensive SED Estimation Routine Involving Data-driven Weight calculatioNs) covers the full forward
-          model, from simple stellar populations through nebular emission and dust to the projection onto the
-          observed frame, so that posteriors over stellar mass, star-formation history, chemical enrichment, dust
-          and redshift can be sampled on the GPU.</p>
-          <p>Production inference uses a GPU nested slice sampler, with Hamiltonian Monte Carlo and variational
-          inference available for the same model. It supports non-parametric star-formation histories with of order
-          one hundred age bins and jointly sampled chemical enrichment, and is a median of 134 times faster than
-          CPU <span class="muted">Prospector</span> on high-redshift galaxies.</p>
+          <p><em>CERIDWEN</em> (Comprehensive SED Estimation Routine Involving Data-driven Weight calculatioNs) fits
+          stellar population models to galaxy photometry and spectra. It is written in JAX and covers the full
+          forward model: simple stellar populations, nebular emission, dust, and the projection onto the observed
+          frame. Every step is differentiable and runs on the GPU, so posteriors over stellar mass, star-formation
+          history, chemical enrichment, dust and redshift can be sampled there directly.</p>
+          <p>Production runs use a GPU nested slice sampler, and Hamiltonian Monte Carlo and variational inference are
+          available for the same model. Star-formation histories can be non-parametric with of order one hundred age
+          bins, with chemical enrichment sampled jointly. On high-redshift galaxies CERIDWEN is a median of 134 times
+          faster than <span class="muted">Prospector</span> on a CPU.</p>
           <div class="meta">
             <span class="pill">JAX</span><span class="pill">nested sampling</span>
             <span class="pill">Hamiltonian Monte Carlo</span><span class="pill">variational inference</span>
@@ -67,15 +67,39 @@
         </div>
 
         <div class="card">
+          <h3><i class="fa-solid fa-flask" style="color:var(--accent)"></i> CERIDWEN Ingredient Explorer
+            <span class="repo">· runs in the browser</span></h3>
+          <p>A browser port of the CERIDWEN forward model, checked against the Python code. You can change the
+          stellar population, the gas and the dust, add AGN and dust emission, and see how the spectrum changes and
+          how the galaxy would look through the filters and spectrographs of many telescopes. It can also make mock
+          catalogues.</p>
+          <a class="retro-link" href="https://www.amanda-stoffers.de/ceridwen-explorer/#explorer">
+            <span class="rl-bar"><span>C:\WEB\CERIDWEN\explorer.html</span><span class="rl-btns" aria-hidden="true"><span>_</span><span>&#9633;</span><span>x</span></span></span>
+            <span class="rl-sky">
+              <svg class="rl-spark s0" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><path fill="#fff" d="M2 0h1v5h-1zM0 2h5v1h-5z"/><path fill="#7df9ff" d="M2 2h1v1h-1z"/></svg><svg class="rl-spark s1" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><path fill="#fff" d="M2 0h1v5h-1zM0 2h5v1h-5z"/><path fill="#7df9ff" d="M2 2h1v1h-1z"/></svg><svg class="rl-spark s2" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><path fill="#fff" d="M2 0h1v5h-1zM0 2h5v1h-5z"/><path fill="#7df9ff" d="M2 2h1v1h-1z"/></svg><svg class="rl-spark s3" viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true"><path fill="#fff" d="M2 0h1v5h-1zM0 2h5v1h-5z"/><path fill="#7df9ff" d="M2 2h1v1h-1z"/></svg>
+              <span class="rl-ttl">
+                <svg class="rl-sprite rl-cat" viewBox="0 0 16 12" shape-rendering="crispEdges" aria-hidden="true"><path fill="#b9a6ff" d="M2 0h1v1h-1zM13 0h1v1h-1zM1 1h1v1h-1zM3 1h1v1h-1zM12 1h1v1h-1zM14 1h1v1h-1zM1 2h1v1h-1zM4 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM1 3h1v1h-1zM5 3h1v1h-1zM6 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM14 3h1v1h-1zM0 4h1v1h-1zM15 4h1v1h-1zM0 5h1v1h-1zM15 5h1v1h-1zM0 6h1v1h-1zM15 6h1v1h-1zM0 7h1v1h-1zM15 7h1v1h-1zM0 8h1v1h-1zM15 8h1v1h-1zM1 9h1v1h-1zM15 9h1v1h-1zM2 10h1v1h-1zM13 10h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1z"/><path fill="#ff8fd0" d="M2 1h1v1h-1zM13 1h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1z"/><path fill="#1b1430" d="M2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM13 3h1v1h-1zM1 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM1 5h1v1h-1zM2 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM9 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM1 7h1v1h-1zM2 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1zM11 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1z"/><path fill="#39ff14" d="M3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM10 6h1v1h-1zM11 6h1v1h-1zM12 6h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM5 7h1v1h-1zM10 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1z"/><path fill="#ff5aa0" d="M7 8h1v1h-1zM8 8h1v1h-1z"/><path fill="#3a2f5c" d="M7 9h1v1h-1zM8 9h1v1h-1z"/><g class="pupils"><path fill="#0b0816" d="M4 6h1v2h-1zM11 6h1v2h-1z"/></g></svg>
+                <span class="rl-ptwrap"><img class="rl-ptitle" src="assets/img/ceridwen-explorer-title.svg" width="119" height="29" alt="CERIDWEN Ingredient Explorer"><span class="rl-shimmer" aria-hidden="true"></span></span>
+                <svg class="rl-sprite rl-galaxy" viewBox="0 0 17 15" shape-rendering="crispEdges" aria-hidden="true"><path fill="#c77dff" d="M6 0h1v1h-1zM9 0h1v1h-1zM4 1h1v1h-1zM8 1h1v1h-1zM13 1h1v1h-1zM3 2h1v1h-1zM2 3h1v1h-1zM15 3h1v1h-1zM1 4h1v1h-1zM1 5h1v1h-1zM15 6h1v1h-1zM1 7h1v1h-1zM15 7h1v1h-1zM1 8h1v1h-1zM15 9h1v1h-1zM15 10h1v1h-1zM1 11h1v1h-1zM14 11h1v1h-1zM13 12h1v1h-1zM3 13h1v1h-1zM12 13h1v1h-1zM7 14h1v1h-1zM10 14h1v1h-1z"/><path fill="#7df9ff" d="M9 1h1v1h-1zM10 1h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM11 2h1v1h-1zM5 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM4 4h1v1h-1zM12 4h1v1h-1zM3 5h1v1h-1zM13 5h1v1h-1zM3 6h1v1h-1zM13 6h1v1h-1zM3 7h1v1h-1zM13 7h1v1h-1zM3 8h1v1h-1zM13 8h1v1h-1zM3 9h1v1h-1zM13 9h1v1h-1zM4 10h1v1h-1zM12 10h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM11 11h1v1h-1zM5 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1z"/><path fill="#ffd6f5" d="M7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM5 6h1v1h-1zM11 6h1v1h-1zM5 7h1v1h-1zM11 7h1v1h-1zM5 8h1v1h-1zM11 8h1v1h-1zM6 9h1v1h-1zM10 9h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1z"/><path fill="#ffffff" d="M7 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM9 6h1v1h-1zM10 6h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1z"/></svg>
+              </span>
+              <span class="rl-ticker" aria-hidden="true"><span>*** CERIDWEN INGREDIENT EXPLORER *** stars + gas + dust = one galaxy spectrum *** move a slider, watch the light change *** now with AGN, dust emission and mock catalogues *** click to enter *** </span></span>
+              <span class="rl-foot">
+                <span class="rl-lede">Change the stars, gas and dust of a model galaxy and watch its spectrum respond, then see how it would look through the filters and spectrographs of many telescopes. Runs a port of the <b>CERIDWEN</b> forward model in your browser.</span>
+                <span class="rl-enter" aria-hidden="true">ENTER &gt;&gt;</span>
+              </span>
+            </span>
+          </a>
+        </div>
+
+        <div class="card">
           <h3><i class="fa-solid fa-diagram-project" style="color:var(--accent)"></i> JADES fit explorer
             <span class="repo">· interactive catalogue</span></h3>
-          <p>Within the <a href="https://jades-survey.github.io/">JADES</a> collaboration I lead the construction of a
-          value-added catalogue of inferred physical properties (stellar masses, star-formation histories, dust,
-          metallicities and ionising properties) for the galaxies with both NIRCam photometry and NIRSpec
-          spectroscopy, fitted jointly with CERIDWEN. The fit explorer shows these fits and their posteriors: a
-          searchable catalogue table with a page per galaxy, and the <em>SED manifold</em>, which displays scaling
-          relations as rotating projections of the fitted parameter space, with filters on redshift and
-          spectroscopic quality.</p>
+          <p>In <a href="https://jades-survey.github.io/">JADES</a> I lead a value-added catalogue of inferred
+          physical properties (stellar masses, star-formation histories, dust, metallicities and ionising properties)
+          for the galaxies with both NIRCam photometry and NIRSpec spectroscopy, fitted jointly with CERIDWEN. The fit
+          explorer shows these fits and their posteriors in two views: a searchable catalogue table with a page for
+          each galaxy, and the <em>SED manifold</em>, which shows scaling relations as rotating projections of the
+          fitted parameter space and can be filtered by redshift and spectroscopic quality.</p>
           <div class="meta">
             <span class="pill">JWST</span><span class="pill">JADES</span><span class="pill">NIRCam + NIRSpec</span>
             <span class="pill">interactive visualisation</span>
@@ -89,10 +113,10 @@
         <div class="card">
           <h3><i class="fa-solid fa-filter" style="color:var(--accent)"></i> sedpy_jax
             <span class="repo">· github.com/Espe13/sedpy_jax</span></h3>
-          <p>A JAX reimplementation of <span class="muted">sedpy</span> (B.&nbsp;D. Johnson) for GPU-ready,
-          differentiable filter handling and broadband photometric projection: transmission curves, AB and Vega
-          magnitudes, flux-conserving rebinning, air&ndash;vacuum conversion, and effective, pivot and zero-point
-          wavelengths, vectorised over many filters at once.</p>
+          <p>A JAX reimplementation of <span class="muted">sedpy</span> (B.&nbsp;D. Johnson) for differentiable filter
+          handling and broadband photometry on the GPU. It covers transmission curves, AB and Vega magnitudes,
+          flux-conserving rebinning, air&ndash;vacuum conversion, and effective, pivot and zero-point wavelengths, all
+          vectorised over many filters at once.</p>
           <div class="meta">
             <span class="pill">JAX</span><span class="pill">photometry</span><span class="pill">filters</span>
           </div>

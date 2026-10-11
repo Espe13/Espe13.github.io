@@ -332,7 +332,6 @@ footer .social { justify-content: center; font-size: 1.1rem; margin: 0 0 12px; }
 .explore-card > i { color: var(--accent); font-size: 1.3rem; margin-top: 3px; }
 .explore-card strong { display: block; }
 .explore-card .muted { display: block; font-size: .88rem; margin-top: 2px; }
-.news-head { margin-top: 30px; }
 .news { list-style: none; padding: 0; margin: 10px 0 24px; }
 .news li { display: flex; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: .96rem; }
 .news li:last-child { border-bottom: none; }
@@ -365,3 +364,125 @@ footer .social { justify-content: center; font-size: 1.1rem; margin: 0 0 12px; }
 }
 .manifold-link.manifold-ready .manifold-fallback { display: none; }
 .manifold-fig figcaption { font-size: .82rem; color: var(--text-muted); margin-top: 8px; }
+
+/* ---------- Home sections ---------- */
+.home-section { margin-top: 56px; }
+.home-section h2 { margin-bottom: .9em; }
+.lead-in { font-weight: 700; color: var(--text); }
+.more-link { font-size: .95rem; }
+
+/* ---------- Retro link to the CERIDWEN Ingredient Explorer ----------
+   Same skin as the explorer's own header: a Windows-98 window with a
+   starfield panel, the chrome pixel title, the cat and galaxy sprites
+   and the green VT323 ticker. */
+.retro-link {
+  --r-face: #eceaf0; --r-hi: #ffffff; --r-lo: #b3afbd; --r-dk: #55505f; --r-hl: #f8f7fa; --r-drop: #1a0033;
+  display: block; margin: 24px 0 28px; color: #e8e8ff; text-decoration: none;
+  background: var(--r-face);
+  border: 2px solid; border-color: var(--r-hi) var(--r-dk) var(--r-dk) var(--r-hi);
+  box-shadow: inset -1px -1px 0 var(--r-lo), inset 1px 1px 0 var(--r-hl), 6px 6px 0 var(--r-drop);
+  padding: 0 3px 3px;
+  transition: transform .12s steps(2), box-shadow .12s steps(2);
+}
+html[data-theme="dark"] .retro-link {
+  --r-face: #24212f; --r-hi: #5c5770; --r-lo: #2a2636; --r-dk: #0b0a10; --r-hl: #3d3950; --r-drop: #000000;
+}
+.retro-link:hover, .retro-link:focus-visible {
+  color: #e8e8ff; text-decoration: none; transform: translate(-2px, -2px);
+  box-shadow: inset -1px -1px 0 var(--r-lo), inset 1px 1px 0 var(--r-hl), 8px 8px 0 var(--r-drop);
+}
+.retro-link:active {
+  transform: translate(4px, 4px);
+  box-shadow: inset -1px -1px 0 var(--r-lo), inset 1px 1px 0 var(--r-hl), 2px 2px 0 var(--r-drop);
+}
+.retro-link:focus-visible { outline: 2px solid #ff7a00; outline-offset: 3px; }
+.retro-link .rl-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin: 0 -3px 3px; padding: 3px 4px 3px 8px;
+  background: linear-gradient(90deg, #000080, #1084d0); color: #fff;
+  font: 700 12px/1.3 Tahoma, Verdana, "Segoe UI", sans-serif;
+  white-space: nowrap; overflow: hidden;
+}
+.retro-link .rl-bar > span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.retro-link .rl-btns { display: flex; gap: 2px; flex: none; }
+.retro-link .rl-btns span {
+  width: 16px; height: 14px; background: var(--r-face); color: #000; text-align: center;
+  font: 700 10px/12px Tahoma, sans-serif;
+  border: 1px solid; border-color: var(--r-hi) var(--r-dk) var(--r-dk) var(--r-hi);
+}
+html[data-theme="dark"] .retro-link .rl-btns span { color: #ecebf5; }
+.retro-link .rl-sky {
+  position: relative; display: grid; gap: 10px; overflow: hidden;
+  padding: 20px 14px 14px;
+  background: #05031a url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAABYUlEQVR42u3cQU7DMBAF0EiIS/SOPQJnYcv9WHVlFgg2SEFVHOeP/arZ1335njS22+315Tam7vePYe/VsbaKgwaUCtTeP+ebIwcHL0EBQKWjJ0GASgDtt/+caq1J0HNtcUsb2d9rqAct2YNK39olCBAgQIAAXVhvjwZoT+e7ZgPq+NVJgsZdCU0aECBAgLredyQIUD7QkcCnrZkeHKoExQDVWoT9Ha0EnZOgzI3AM0IqQfFA4bvSEgQIEKAYoGk21CUI0MRAhZ7mKyUoltUUAwToYqC07jB4PBIECBAgQIDqLuNLEKBAoCo/n8tKUFE1U+xMoMnWxjoDtZ8XIAlSgAABAgSo5ElQCfpHH5AEAVoFKPP4lgQdBlr8XJ4EAQIEaCWgci1fgmoC5Wyi9QeK/YsAUwwQoFWAZnp8WzFBT91GtjFJqZspPWggUFRMeh2skCBA44EmOxa0/3G2Eo3gwvoCGXg+awr4EUkAAAAASUVORK5CYII=") repeat; background-size: 192px 192px;
+  border: 2px solid; border-color: var(--r-dk) var(--r-hi) var(--r-hi) var(--r-dk);
+}
+.retro-link .rl-ttl {
+  display: grid; grid-template-columns: minmax(36px, 76px) minmax(0, 1fr) minmax(36px, 72px);
+  gap: 12px; align-items: center; position: relative; z-index: 1;
+}
+.retro-link .rl-sprite { width: 100%; height: auto; display: block; }
+.retro-link .rl-cat { animation: rl-headfloat 5s ease-in-out infinite; overflow: visible; }
+.retro-link .rl-cat .pupils { animation: rl-look 7s ease-in-out infinite; }
+.retro-link .rl-galaxy { animation: rl-spin 12s steps(24) infinite; }
+.retro-link .rl-ptwrap { position: relative; display: block; min-width: 0; }
+.retro-link .rl-ptitle {
+  width: 100%; height: auto; display: block; image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px rgba(125, 249, 255, .45));
+}
+.retro-link .rl-shimmer {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.95) 50%, rgba(255,255,255,0) 58%) no-repeat;
+  background-size: 250% 100%; background-position: 150% 0;
+  -webkit-mask-image: url("../img/ceridwen-explorer-title-mask.svg"); mask-image: url("../img/ceridwen-explorer-title-mask.svg");
+  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  animation: rl-shimmer 10s linear infinite;
+}
+.retro-link:hover .rl-shimmer { animation-duration: 2.5s; }
+.retro-link .rl-spark { position: absolute; width: 15px; height: 15px; animation: rl-tw 1.8s steps(3) infinite; }
+.retro-link .s0 { left: 16%; top: 8px; }
+.retro-link .s1 { right: 20%; top: 14px; animation-delay: .6s; }
+.retro-link .s2 { left: 54%; top: 2px; animation-delay: 1.2s; }
+.retro-link .s3 { right: 2%; top: 4px; animation-delay: .3s; }
+.retro-link .rl-ticker {
+  display: block; overflow: hidden; white-space: nowrap; position: relative; z-index: 1;
+  border: 2px solid; border-color: var(--r-lo) var(--r-hi) var(--r-hi) var(--r-lo);
+  background: #000; color: #39ff14; font: 22px/1.1 "VT323", "Courier New", monospace; padding: 2px 0;
+}
+.retro-link .rl-ticker span { display: inline-block; padding-left: 100%; animation: rl-tick 36s linear infinite; }
+.retro-link .rl-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; position: relative; z-index: 1;
+}
+.retro-link .rl-lede { color: #e8e8ff; font: 16px/1.5 "Times New Roman", Times, serif; }
+.retro-link .rl-lede b { color: #ffe14d; font-weight: 700; }
+.retro-link .rl-enter {
+  flex: none; display: inline-block; padding: 8px 10px;
+  font: 9px/1.2 "Press Start 2P", "Courier New", monospace; color: #000; background: #ffe14d;
+  border: 2px solid; border-color: #fff8c2 #7a6200 #7a6200 #fff8c2; box-shadow: 3px 3px 0 #ff2bd6;
+}
+.retro-link:hover .rl-enter { animation: rl-blink 1s steps(1) infinite; }
+/* Light theme: white panel, dark text, purple sparkles */
+html:not([data-theme="dark"]) .retro-link .rl-sky { background: #ffffff; }
+html:not([data-theme="dark"]) .retro-link .rl-lede { color: #000000; }
+html:not([data-theme="dark"]) .retro-link .rl-lede b { color: #000080; }
+html:not([data-theme="dark"]) .retro-link .rl-spark path:first-child { fill: #8a1bd1; }
+html:not([data-theme="dark"]) .retro-link .rl-spark path:last-child { fill: #ff2bd6; }
+html:not([data-theme="dark"]) .retro-link .rl-ptitle { filter: drop-shadow(0 0 4px rgba(138, 27, 209, .35)); }
+@keyframes rl-headfloat { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
+@keyframes rl-look { 0%, 12% { transform: translateX(-1px); } 38%, 62% { transform: translateX(1px); } 88%, 100% { transform: translateX(-1px); } }
+@keyframes rl-spin { to { transform: rotate(-360deg); } }
+@keyframes rl-shimmer { 0%, 86% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+@keyframes rl-tw { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+@keyframes rl-tick { to { transform: translateX(-100%); } }
+@keyframes rl-blink { 50% { background: #ff2bd6; color: #fff; } }
+@media (max-width: 680px) {
+  .retro-link .rl-ttl { grid-template-columns: 30px minmax(0, 1fr) 28px; gap: 6px; }
+  .retro-link .rl-ticker { font-size: 18px; }
+  .retro-link .rl-foot { flex-direction: column; align-items: flex-start; text-align: left; }
+  .retro-link .rl-lede { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .retro-link, .retro-link * { animation: none !important; transition: none !important; }
+  .retro-link .rl-ticker span { padding-left: 8px; }
+}

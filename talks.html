@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Amanda Stoffers">
-  <meta name="description" content="Talks, conferences and meetings — Amanda Stoffers.">
+  <meta name="description" content="Talks, conferences and meetings of Amanda Stoffers.">
   <title>Talks &amp; Meetings · Amanda Stoffers</title>
   <link rel="canonical" href="https://www.amanda-stoffers.de/talks.html">
   <meta property="og:title" content="Talks &amp; Meetings · Amanda Stoffers">
   <meta property="og:url" content="https://www.amanda-stoffers.de/talks.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&family=Silkscreen:wght@400;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/retro-touch.css">
   <script src="assets/js/main.js"></script>
 </head>
 <body>
@@ -38,7 +39,14 @@
       <h1>Talks &amp; Meetings</h1>
       <p class="muted">Seminars, conference talks and meeting organisation, most recent first.</p>
 
-      <section style="margin-top:32px">
+      <div class="lcd-stats" aria-label="Summary of talks and meetings">
+        <a class="lcd" href="#invited"><b data-count="invited">00</b><span>invited</span></a>
+        <a class="lcd" href="#contributed"><b data-count="contributed">00</b><span>contributed</span></a>
+        <a class="lcd" href="#workshop"><b data-count="workshop">00</b><span>workshop</span></a>
+        <a class="lcd" href="#service"><b data-count="service">00</b><span>organised</span></a>
+      </div>
+
+      <section id="invited" data-kind="invited" style="margin-top:32px">
         <h2>Invited</h2>
 
         <div class="talk">
@@ -60,7 +68,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="contributed" data-kind="contributed">
         <h2>Contributed</h2>
 
         <div class="talk">
@@ -106,7 +114,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="workshop" data-kind="workshop">
         <h2>Workshop presentations</h2>
 
         <div class="talk">
@@ -125,11 +133,11 @@
           </div>
         </div>
 
-        <p class="muted" style="margin-top:14px"><i class="fa-solid fa-award" style="color:var(--accent)"></i>
+        <p class="award"><i class="fa-solid fa-award"></i>
           Best Talk and Presentation, Jesus College Graduate Research Conference, Cambridge (2025).</p>
       </section>
 
-      <section>
+      <section id="service" data-kind="service">
         <h2>Organisation &amp; service</h2>
 
         <div class="talk">
@@ -173,5 +181,12 @@
     </div>
   </footer>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script>
+    // Fill the LCD counters from the entries on the page.
+    document.querySelectorAll("[data-count]").forEach(function (el) {
+      var n = document.querySelectorAll('section[data-kind="' + el.dataset.count + '"] .talk').length;
+      el.textContent = String(n).padStart(2, "0");
+    });
+  </script>
 </body>
 </html>

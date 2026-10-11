@@ -1,0 +1,289 @@
+/* =========================================================
+   Retro touch: the site's retro skin, loaded after main.css on every page.
+   Same layout, palette and content. Adds pixel and monospace
+   type, bevelled Windows-98 style frames with title bars,
+   hard pixel shadows, LCD date chips, a terminal cursor and
+   faint scanlines.
+   ========================================================= */
+
+:root {
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-pixel: "VT323", "Courier New", monospace;
+  --font-chunky: "Silkscreen", "Courier New", monospace;
+  --radius: 0px;
+  --pink: #ff2bd6;
+  /* bevel colours */
+  --bv-hi: #ffffff; --bv-lo: #b3afbd; --bv-dk: #55505f; --bv-face: #eceaf0;
+  --hard: #1f2328;
+  --shadow: 4px 4px 0 rgba(31, 35, 40, .18);
+  --bar: linear-gradient(90deg, #237a59, #2e9e74 55%, #85b09a);
+}
+html[data-theme="dark"] {
+  --bv-hi: #5c5770; --bv-lo: #2a2636; --bv-dk: #000000; --bv-face: #1b1826;
+  --hard: #000000;
+  --shadow: 4px 4px 0 rgba(0, 0, 0, .7);
+  --bar: linear-gradient(90deg, #12002b, #2a1a5e 45%, #237a59);
+}
+
+::selection { background: var(--pink); color: #ffffff; }
+
+/* Light theme: faint graph paper. Dark theme: scanlines over the starfield. */
+html:not([data-theme="dark"]) body {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(rgba(46, 158, 116, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 158, 116, .07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+/* Light theme: a faint pixel sky behind the page (stars, Orion and Cassiopeia,
+   three small galaxies in the margins), kept quiet behind the text column. */
+html:not([data-theme="dark"]) body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: url("../img/starchart-light.svg") center / cover no-repeat;
+}
+html[data-theme="dark"] body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 200;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,.03) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- Navbar ---------- */
+.nav { border-bottom: 2px solid var(--bv-dk); box-shadow: inset 0 -2px 0 var(--bv-lo); }
+.brand { font-family: var(--font-pixel); font-weight: 400; font-size: 1.85rem; letter-spacing: .02em; line-height: 1; }
+.brand::after { content: "_"; color: var(--accent); margin-left: 2px; animation: rt-cursor 1.1s steps(1) infinite; }
+@keyframes rt-cursor { 50% { opacity: 0; } }
+.nav-links a { font-family: var(--font-mono); font-size: .88rem; }
+.nav-links a.active::before { content: "["; }
+.nav-links a.active::after { content: "]"; }
+.theme-toggle {
+  border-radius: 0; background: var(--bv-face);
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+}
+.theme-toggle:active { border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk); }
+
+/* ---------- Headings ---------- */
+h1 {
+  font-family: var(--font-pixel); font-weight: 400; font-size: 3.2rem; letter-spacing: .01em; line-height: 1;
+  text-shadow: 3px 3px 0 rgba(255, 43, 214, .35);
+}
+h2 {
+  font-family: var(--font-chunky); font-weight: 700; font-size: 1.35rem; letter-spacing: .02em;
+  text-shadow: 2px 2px 0 rgba(255, 43, 214, .3);
+  border-bottom: 0; padding-bottom: .5em;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 10px) left bottom / 100% 3px no-repeat;
+}
+h2::before { content: "> "; color: var(--accent); }
+h3 { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0; }
+.affil { font-family: var(--font-mono); font-size: .92rem; }
+.lead-in { font-family: var(--font-mono); font-size: .92em; }
+
+/* Links: dotted underline, solid on hover */
+main p a, .news a { text-decoration: underline dotted; text-underline-offset: 3px; }
+main p a:hover, .news a:hover { text-decoration-style: solid; }
+
+/* ---------- Window frames with title bars ---------- */
+.profile, .manifold-fig, .inline-photo {
+  background: var(--bv-face); padding: 0 3px 3px;
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: inset -1px -1px 0 var(--bv-lo), 4px 4px 0 var(--hard);
+}
+.profile::before, .manifold-fig::before, .inline-photo::before {
+  display: block; margin: 0 -3px 3px; padding: 2px 8px;
+  background: var(--bar); color: #ffffff;
+  font: 700 12px/1.4 Tahoma, Verdana, "Segoe UI", sans-serif; text-align: left;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.profile::before { content: "profile.jpg"; }
+.manifold-fig::before { content: "jades_manifold.exe"; }
+.inline-photo::before { content: "may_bumps.jpg"; }
+.profile img, .inline-photo img, .manifold-link {
+  border-radius: 0; box-shadow: none;
+  border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+}
+.manifold-link:hover { transform: none; }
+.profile figcaption, .inline-photo figcaption, .manifold-fig figcaption {
+  font-family: var(--font-mono); font-size: .74rem; padding: 2px 6px 4px; margin-top: 4px;
+}
+
+/* ---------- Cards: bevelled panels with hard shadow ---------- */
+.card, .explore-card {
+  border-radius: 0; background: var(--bv-face);
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: inset -1px -1px 0 var(--bv-lo), 4px 4px 0 var(--hard);
+  transition: transform .1s steps(2), box-shadow .1s steps(2);
+}
+.card:hover, .explore-card:hover {
+  transform: translate(-2px, -2px); border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: inset -1px -1px 0 var(--bv-lo), 6px 6px 0 var(--accent);
+}
+.explore-card:active { transform: translate(3px, 3px); box-shadow: inset 1px 1px 0 var(--bv-lo), 1px 1px 0 var(--hard); }
+
+/* ---------- Buttons: Windows-98 bevel ---------- */
+.btn {
+  border-radius: 0; font-family: var(--font-mono); font-size: .88rem;
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: 3px 3px 0 var(--hard);
+}
+.btn-primary { border-color: #8ce0b0 #14513a #14513a #8ce0b0; }
+.btn-ghost { background: var(--bv-face); }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--hard); }
+.btn:active { transform: translate(3px, 3px); box-shadow: none; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk); }
+
+/* ---------- Social icons as small bevelled keys ---------- */
+.social { gap: 8px; }
+.social a {
+  display: inline-grid; place-items: center; width: 38px; height: 38px; font-size: 1.05rem;
+  background: var(--bv-face);
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: 2px 2px 0 var(--hard);
+}
+.social a:hover { transform: translate(-1px, -1px); }
+.social a:active { transform: translate(2px, 2px); box-shadow: none; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk); }
+
+/* ---------- News, publications, talks: LCD date chips ---------- */
+.news-date {
+  flex: 0 0 auto; align-self: flex-start; min-width: 82px; text-align: center;
+  font: 20px/1 var(--font-pixel); color: #39ff14; background: #000000;
+  padding: 3px 6px; border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+}
+.pub-year, .talk-date { font-family: var(--font-pixel); font-size: 1.25rem; font-weight: 400; }
+.news li, .pub, .talk { border-bottom-style: dashed; align-items: flex-start; }
+.tag, .pill { border-radius: 0; font-family: var(--font-mono); text-transform: none; letter-spacing: 0; }
+.manifold-link .manifold-cta { border-radius: 0; font-family: var(--font-mono); }
+
+/* Chunky scrollbar */
+html { scrollbar-color: var(--accent) var(--bv-face); }
+::-webkit-scrollbar { width: 14px; }
+::-webkit-scrollbar-track { background: var(--bv-face); }
+::-webkit-scrollbar-thumb { background: var(--accent); border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi); }
+
+footer { border-top: 2px dashed var(--border); font-family: var(--font-pixel); font-size: 1.15rem; }
+footer .social a { width: 32px; height: 32px; font-size: .95rem; }
+
+/* ---------- Subpage titles ---------- */
+main > .wrap > h1 + .muted { font-family: var(--font-mono); font-size: .9rem; }
+section[id] { scroll-margin-top: 84px; }
+
+/* ---------- Code page: cards get a window title bar ---------- */
+.card h3 {
+  margin: -22px -24px 16px; padding: 5px 12px;
+  background: var(--bar); color: #ffffff;
+  font: 700 14px/1.4 Tahoma, Verdana, "Segoe UI", sans-serif; letter-spacing: 0;
+}
+.card h3 i { color: #ffffff !important; }
+.card h3 .repo { color: rgba(255, 255, 255, .78); font: 400 12px var(--font-mono); }
+.card .retro-link { margin-bottom: 4px; }
+
+/* ---------- Publications: year as an LCD chip ---------- */
+.pub-year {
+  flex: 0 0 86px; width: 86px; align-self: flex-start; text-align: center; white-space: nowrap;
+  font: 20px/1 var(--font-pixel); color: #39ff14; background: #000000;
+  padding: 3px 6px; border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+}
+.pub-title { font-weight: 700; }
+.tag-new { background: #ffe14d !important; color: #e00000 !important; border-color: #e00000 !important;
+  font: 8px/1.4 "Press Start 2P", monospace !important; padding: 3px 5px; animation: rt-blink 1.2s steps(1) infinite; }
+@keyframes rt-blink { 50% { opacity: .35; } }
+
+/* ---------- Talks: LCD counters ---------- */
+.lcd-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 26px 0 8px; }
+.lcd {
+  display: grid; justify-items: center; gap: 4px; padding: 10px 8px 8px; text-decoration: none;
+  background: var(--bv-face); color: var(--text);
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: inset -1px -1px 0 var(--bv-lo), 3px 3px 0 var(--hard);
+  transition: transform .1s steps(2);
+}
+.lcd:hover { text-decoration: none; transform: translate(-1px, -1px); }
+.lcd:active { transform: translate(2px, 2px); box-shadow: none; }
+.lcd b {
+  display: block; width: 100%; text-align: center; font: 400 44px/1 var(--font-pixel); letter-spacing: .08em;
+  color: #39ff14; background: #000000; padding: 4px 0 2px; text-shadow: 0 0 6px rgba(57, 255, 20, .55);
+  border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+}
+.lcd span { font: 700 11px/1.2 var(--font-chunky); text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); }
+.lcd:nth-child(1) b { color: #ff2bd6; text-shadow: 0 0 6px rgba(255, 43, 214, .55); }
+.lcd:nth-child(3) b { color: #7df9ff; text-shadow: 0 0 6px rgba(125, 249, 255, .5); }
+.lcd:nth-child(4) b { color: #ffe14d; text-shadow: 0 0 6px rgba(255, 225, 77, .5); }
+
+/* ---------- Talks and publications: timeline with pixel nodes ---------- */
+section[data-kind] :is(.talk, .pub) { position: relative; padding-left: 30px; border-bottom: 0; }
+section[data-kind] :is(.talk, .pub)::before {
+  content: ""; position: absolute; left: 7px; top: 0; bottom: 0;
+  border-left: 2px dashed var(--accent); opacity: .55;
+}
+section[data-kind] :is(.talk, .pub):first-of-type::before { top: 24px; }
+section[data-kind] :is(.talk, .pub):last-of-type::before { bottom: auto; height: 24px; }
+section[data-kind] :is(.talk, .pub):only-of-type::before { display: none; }
+section[data-kind] :is(.talk, .pub)::after {
+  content: ""; position: absolute; left: 1px; top: 20px; width: 14px; height: 14px;
+  background: var(--accent); border: 2px solid var(--hard); box-shadow: 2px 2px 0 var(--hard);
+}
+section[data-kind="invited"] .talk::after { background: #ff2bd6; }
+section[data-kind="workshop"] .talk::after { background: #7df9ff; }
+section[data-kind="service"] .talk::after { background: #ffe14d; }
+section[data-kind="first"] .pub::after { background: #ff2bd6; }
+section[data-kind="coauthor"] .pub::after { background: #7df9ff; }
+section[data-kind="software"] .pub::after { background: #ffe14d; }
+section[data-kind] :is(.talk-body, .pub-body) {
+  padding: 10px 14px; background: var(--bv-face);
+  border: 2px solid; border-color: var(--bv-hi) var(--bv-dk) var(--bv-dk) var(--bv-hi);
+  box-shadow: inset -1px -1px 0 var(--bv-lo), 3px 3px 0 var(--hard);
+  transition: transform .1s steps(2);
+}
+section[data-kind] :is(.talk, .pub):hover :is(.talk-body, .pub-body) { transform: translate(-2px, -2px); box-shadow: inset -1px -1px 0 var(--bv-lo), 5px 5px 0 var(--accent); }
+section[data-kind] :is(.talk-title, .pub-title) { margin: 0 0 4px; }
+section[data-kind] .talk-where { margin: 0; font-family: var(--font-mono); font-size: .82rem; }
+section[data-kind] .talk-where::before { content: "@ "; color: var(--accent); font-weight: 600; }
+.talk-date {
+  flex: 0 0 122px; width: 122px; align-self: flex-start; margin-top: 8px; text-align: center; white-space: nowrap;
+  font: 20px/1 var(--font-pixel); color: #39ff14; background: #000000;
+  padding: 3px 6px; border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+}
+section[data-kind] .pub-year { margin-top: 8px; }
+section[data-kind] .pub-body .links-inline { margin: 6px 0 0; }
+section[data-kind] .pub-venue { margin-bottom: 0; }
+section[data-kind="invited"] .tag { background: #ff2bd6; color: #ffffff; border-color: #a0007f; }
+.award {
+  display: flex; align-items: center; gap: 10px; margin: 20px 0 0; padding: 10px 14px;
+  background: #000000; color: #ffe14d; font: 20px/1.2 var(--font-pixel);
+  border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+  box-shadow: 3px 3px 0 var(--hard);
+}
+.award i { color: #ffe14d; font-size: 1.1rem; text-shadow: 0 0 6px rgba(255, 225, 77, .6); }
+
+/* ---------- Light theme: light pink displays instead of black ones ---------- */
+html:not([data-theme="dark"]) :is(.news-date, .pub-year, .talk-date, .lcd b, .award) {
+  background: #ffe6f4; color: #5a1846; text-shadow: none;
+  border-color: #d9a3c4 #ffffff #ffffff #d9a3c4;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .08);
+}
+html:not([data-theme="dark"]) .lcd:nth-child(1) b { color: #b0127e; }
+html:not([data-theme="dark"]) .lcd:nth-child(2) b { color: #1f6b3a; }
+html:not([data-theme="dark"]) .lcd:nth-child(3) b { color: #0b6b86; }
+html:not([data-theme="dark"]) .lcd:nth-child(4) b { color: #8a5a00; }
+html:not([data-theme="dark"]) .award { color: #5a1846; box-shadow: 3px 3px 0 var(--hard); }
+html:not([data-theme="dark"]) .award i { color: #b07d00; text-shadow: none; }
+
+/* ---------- CV: PDF in a window ---------- */
+.pdf-frame {
+  border-radius: 0; border: 2px solid; border-color: var(--bv-dk) var(--bv-hi) var(--bv-hi) var(--bv-dk);
+  box-shadow: 4px 4px 0 var(--hard);
+}
+
+@media (max-width: 680px) {
+  .lcd-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lcd b { font-size: 36px; }
+  .pub-year, .talk-date { flex: none; width: auto; min-width: 0; align-self: flex-start; margin-top: 0; }
+  section[data-kind] .talk-date { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tag-new { animation: none; }
+}
+
+@media (max-width: 680px) {
+  h1 { font-size: 2.9rem; }
+  .news-date { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand::after { animation: none; }
+}
