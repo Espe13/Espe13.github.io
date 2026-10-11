@@ -1,12 +1,15 @@
 // ============================================================
-//  Theme (night-sky default) + starfield with shooting stars
+//  Theme (follows the system setting; the button overrides it) + starfield
 // ============================================================
 (function () {
   const root = document.documentElement;
   const KEY = "theme";
-  // Default to the night-sky (dark) theme unless the visitor chose light before.
-  const stored = localStorage.getItem(KEY);
-  root.setAttribute("data-theme", stored || "dark");
+  const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  const systemTheme = () => (mq && !mq.matches ? "light" : "dark");
+  function getStored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setStored(v) { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch (e) {} }
+  // A choice made with the button wins; otherwise use the system light/dark setting.
+  root.setAttribute("data-theme", getStored() || systemTheme());
 
   function syncIcon() {
     const dark = root.getAttribute("data-theme") === "dark";
@@ -22,10 +25,21 @@
       btn.addEventListener("click", function () {
         const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
         root.setAttribute("data-theme", next);
-        localStorage.setItem(KEY, next);
+        setStored(next);
         syncIcon();
       });
     });
+
+    // When the system switches between light and dark, follow it (and drop the button choice).
+    if (mq) {
+      const onSystemChange = function () {
+        setStored(null);
+        root.setAttribute("data-theme", systemTheme());
+        syncIcon();
+      };
+      if (mq.addEventListener) mq.addEventListener("change", onSystemChange);
+      else if (mq.addListener) mq.addListener(onSystemChange);
+    }
 
     // Mobile nav
     const toggle = document.querySelector(".nav-toggle");
